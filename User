@@ -1,0 +1,30 @@
+import java.util.Calendar;
+class User{
+    protected String name;
+    protected String surname;
+    public String getFullName(){
+        String result = name + surname;
+        return result;
+    }
+
+    public User(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+}
+class Student extends User{
+    protected int year;
+    public Student(int year,String name, String surname) {
+        super(name, surname);
+        this.year = year;
+    }
+    public int getCourseNumber(){
+        int result = 2022 - this.year;
+        if (result < 1 && result > 6){
+            return -1;
+        }
+        else {
+            return result;
+        }
+    }
+}
