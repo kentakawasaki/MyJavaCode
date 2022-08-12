@@ -1,4 +1,5 @@
 abstract class Animal{
+
     int age;
     double weight;
 
