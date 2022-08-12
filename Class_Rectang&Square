@@ -1,0 +1,43 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class Rectang {
+    double width;
+    double height;
+    public static double getPerimeter(double width, double height) {
+        double result = 2*(width + height);
+        return result;
+    }
+
+    public Rectang(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+}
+class Square {
+    double width;
+    public static double getPerimeter(double width) {
+        double result = 4*width;
+        return result;
+    }
+
+    public Square(double width) {
+        this.width = width;
+    }
+}
+public class MyUtils {
+    public double sumPerimeter(List<Object> firures) {
+        double sum = 0;
+        for(Object rs:firures) {
+            if(rs.getClass() == Square.class) {
+               sum += ((Square) rs).getPerimeter(((Square) rs).width);
+            }
+            if(rs.getClass() == Rectang.class) {
+                sum += ((Rectang) rs).getPerimeter(((Rectang) rs).width,((Rectang) rs).height);
+            }
+
+        }
+        return sum;
+
+    }
+}
