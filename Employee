@@ -1,0 +1,33 @@
+abstract class Employee{
+    protected String employeelD;
+    public String getFullInfo(){
+        return null;
+    };
+    public Employee(String employeelD) {
+        this.employeelD = employeelD;
+    }
+}
+class SalariedEmployee extends Employee{
+    protected String socialSecurityNumber;
+    public SalariedEmployee(String employeelD,String socialSecurityNumber) {
+        super(employeelD);
+        this.socialSecurityNumber = socialSecurityNumber;
+    }
+    public String getFullInfo(){
+        String result = "";
+        result.concat(employeelD).concat(socialSecurityNumber);
+        return result;
+    }
+}
+class ContractEmployee extends Employee{
+    protected String federalTaxIDMember;
+    public ContractEmployee(String employeelD,String federalTaxIDMember) {
+        super(employeelD);
+        this.federalTaxIDMember = federalTaxIDMember;
+    }
+    public String getFullInfo(){
+        String result = "";
+        result.concat(employeelD).concat(federalTaxIDMember);
+        return result;
+    }
+}
