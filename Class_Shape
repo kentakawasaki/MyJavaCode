@@ -1,0 +1,87 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+abstract class Shape {
+    private String name;
+    public Shape(String name){
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getCircleArea(double radius){
+        double result = Math.PI * radius * radius;
+        return result;
+    }
+    public double getRectangleArea(double height,double weight){
+        double result = height * weight;
+        return result;
+
+    }
+   
+}
+class Circle extends Shape {
+    private double radius;
+    public Circle(String name,double radius) {
+        super(name);
+        this.radius = radius;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+    
+}
+class Rectangle extends Shape {
+    private double height;
+    private double weight;
+
+    public Rectangle(String name, double height, double weight) {
+        super(name);
+        this.height = height;
+        this.weight = weight;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+    
+}
+public class MyUtils {
+    public List<Shape> maxAreas(List<Shape> shapes) {
+        double temp;
+        List<Rectangle> rectangleList = new ArrayList<Rectangle>();
+        List<Circle> circleList = new ArrayList<Circle>();
+        List<Shape> maxAreas = new ArrayList<Shape>();
+        for (Shape figure:shapes) {
+            if(figure.getClass() == Circle.class){
+                circleList.add((Circle) figure);
+            }
+            if(figure.getClass() == Rectangle.class){
+                circleList.add((Circle) figure);
+            }
+        }
+        temp = rectangleList.get(0).getRectangleArea(rectangleList.get(0).getHeight(),rectangleList.get(0).getWeight());
+        for (Rectangle rec:rectangleList) {
+            if(rec.getRectangleArea(rec.getHeight(),rec.getWeight()) > temp){
+                maxAreas.add(rec);
+            }
+        }
+        temp = circleList.get(0).getCircleArea(circleList.get(0).getRadius());
+        for (Circle cir:circleList) {
+            if(cir.getCircleArea(cir.getRadius()) > temp){
+                maxAreas.add(cir);
+            }
+        }
+        return maxAreas;
+    }
+}
+
