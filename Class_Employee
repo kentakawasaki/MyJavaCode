@@ -1,0 +1,79 @@
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.*;
+class Employee {
+    private String name;
+    private int experience;
+    private BigDecimal basePayment;
+
+    public Employee(String name, int experience, BigDecimal basePayment) {
+        this.name = name;
+        this.experience = experience;
+        this.basePayment = basePayment;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public BigDecimal getPayment() {
+        return basePayment;
+    }
+}
+class Manager extends Employee {
+    private double coefficient;
+
+    public Manager(String name, int experience, BigDecimal basePayment,double coefficient) {
+        super(name, experience, basePayment);
+        this.coefficient = coefficient;
+    }
+    @Override
+    public BigDecimal getPayment() {
+        BigDecimal result = getPayment().multiply(new BigDecimal(coefficient));
+        return result;
+    }
+    public double getCoefficient() {
+        return coefficient;
+    }
+}
+public class MyUtils {
+    public List<Employee> largestEmployees(List<Employee> workers) {
+        int tempPay;
+        int tempExp;
+        Set<Manager> managerSet = new HashSet<Manager>();
+        Set<Employee> employeeSet = new HashSet<Employee>();
+        List<Employee> maxlist = new ArrayList<Employee>();
+        for (Employee emp: workers) {
+            if (emp.getClass() == Employee.class) {
+               employeeSet.add(emp);
+            }
+            if (emp.getClass() == Manager.class) {
+                managerSet.add((Manager) emp);
+            }
+        }
+        tempExp = workers.get(0).getExperience() - 1;
+        tempPay = workers.get(0).getPayment().divide(BigDecimal.valueOf(1)).intValue();
+        for (Employee st : employeeSet) {
+            if(st.getPayment().intValue() >= tempPay && st.getExperience() >= tempExp ){
+                maxlist.add(st);
+            }
+        }
+        tempExp = workers.get(0).getExperience() - 1;
+        tempPay = workers.get(0).getPayment().divide(BigDecimal.valueOf(1)).intValue();
+        for (Manager manager : managerSet ){
+            if(manager.getPayment().intValue() >= tempPay && manager.getExperience() >= tempExp){
+                maxlist.add(manager);
+            }
+        }
+        return maxlist;
+    }
+}
+
+
