@@ -1,0 +1,84 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+class Person {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public Person(String name) {
+        this.name = name;
+    }
+}
+class Student extends Person {
+    private String studyPlace;
+    private int studyYears;
+
+    public String getStudyPlace() {
+        return studyPlace;
+    }
+
+    public int getStudyYears() {
+        return studyYears;
+    }
+
+    public Student(String name, String studyPlace, int studyYears) {
+        super(name);
+        this.studyPlace = studyPlace;
+        this.studyYears = studyYears;
+    }
+}
+class Worker extends Person {
+    private String workPosition;
+    private int experienceYears;
+
+    public String getWorkPosition() {
+        return workPosition;
+    }
+
+    public int getExperienceYears() {
+        return experienceYears;
+    }
+
+    public Worker(String name, String workPosition, int experienceYears) {
+        super(name);
+        this.workPosition = workPosition;
+        this.experienceYears = experienceYears;
+    }
+}
+
+public class MyUtils {
+    public static List<Person> maxDuration(List<Person> persons) {
+        int temp = 0;
+        List<Student> students = new ArrayList<Student>();
+        List<Worker> workers = new ArrayList<Worker>();
+        List<Person> maxlist = new ArrayList<Person>();
+        for (Person pr : persons) {
+            if (pr.getClass() == Worker.class) {
+                workers.add((Worker) pr);
+            }
+            if (pr.getClass() == Student.class) {
+                students.add((Student) pr);
+            }
+        }
+        temp = students.get(0).getStudyYears() - 1;
+        for (Student st : students) {
+            if(st.getStudyYears() >= temp){
+                maxlist.add(st);
+            }
+        }
+        temp = workers.get(0).getExperienceYears() - 1;
+        for (Worker wr : workers ){
+            if(wr.getExperienceYears() >= temp){
+                maxlist.add(wr);
+            }
+        }
+        return maxlist;
+    }
+}
